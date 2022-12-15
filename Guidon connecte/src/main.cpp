@@ -7,7 +7,7 @@ const String nom = "ESP32-Guidon";
 const char* ssid = "Iphone du bled";
 const char* password = "23032000";
 WiFiClient master;
-IPAddress server(192, 168, 119, 167);
+IPAddress server(192, 168, 20, 167);
 String command;
 unsigned long previousRequest = 0;
 ////
@@ -36,6 +36,7 @@ void setup() {
   pinMode(joystickButtonPin, INPUT_PULLUP);
   pinMode(buttonPin, INPUT_PULLUP);
   pinMode(buzzerPin, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
 
   attachInterrupt(digitalPinToInterrupt(joystickButtonPin), joystickPress, FALLING);
   attachInterrupt(digitalPinToInterrupt(buttonPin), buttonPress, FALLING);
@@ -91,6 +92,7 @@ void wifiConfig(){
   }
   Serial.print(nom);
   Serial.print(F(" connected to Wifi! IP address : ")); Serial.println(WiFi.localIP());
+  digitalWrite(LED_BUILTIN, HIGH);
 }
 
 void requestMaster(String command){
